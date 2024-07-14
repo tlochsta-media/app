@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>tlochsta media</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <style>
+
+        .fullscreen-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+        .fullscreen-iframe {
+            flex: 1;
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+    </style>
+</head>
+<body class="bg-gray-900 text-white">
+    <div id="launch-container" class="relative h-screen flex items-center justify-center">
+        <div class="absolute bottom-4 left-4 flex items-center space-x-2 pr-4 pl-4 pt-3 pb-3 rounded-full bg-gray-800">
+            <div class="w-6 h-6 mr-2 rounded-full overflow-hidden">
+                <img src="https://i.ibb.co/qxDdXcS/MAIN.png" alt="Logo" class="object-cover w-full h-full">
+            </div>
+            <button class="focus:outline-none" id="fullscreen-btn">
+                <i class="fas fa-expand text-xl"></i>
+            </button>
+        </div>
+        <iframe id="content-frame" class="w-full h-full" frameborder="0"></iframe>
+    </div>
+
+    <script>
+        function getQueryParameter(name) {
+            const urlParams = new URLSearchParams(window.location.search);
+            return urlParams.get(name);
+        }
+
+        function toggleFullscreen() {
+            const launchContainer = document.getElementById('launch-container');
+            const iframe = document.body;
+            if (!document.fullscreenElement) {
+                launchContainer.classList.add('fullscreen');
+                document.body.classList.add('fullscreen');
+                iframe.requestFullscreen().catch(err => {
+                    alert(`Error attempting to enable full-screen mode: ${err.message} (${err.name})`);
+                });
+            } else {
+                launchContainer.classList.remove('fullscreen');
+                document.body.classList.remove('fullscreen');
+                document.exitFullscreen();
+            }
+        }
+
+        document.getElementById('fullscreen-btn').addEventListener('click', toggleFullscreen);
+
+        const encodedSrc = getQueryParameter('g');
+        if (encodedSrc) {
+            const decodedSrc = atob(encodedSrc);
+            document.getElementById('content-frame').src = decodedSrc;
+        }
+    </script>
+</body>
+</html>
