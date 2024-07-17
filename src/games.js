@@ -1,6 +1,7 @@
 const games = [
-    { id: 1, title: "Tall Man Run", url: "https://8413946450207224144.playables.usercontent.goog/v/assets/index.html", image: "/img/tall-man-run.webp", type: "Action" },
-    { id: 2, title: "Game 2", url: "https://example.com/game2", image: "https://via.placeholder.com/400x400", type: "Racing" },
-    { id: 3, title: "Game 3", url: "https://example.com/game3", image: "https://via.placeholder.com/400x400", type: "Puzzle" },
-    { id: 4, title: "Game 4", url: "https://example.com/game4", image: "https://via.placeholder.com/400x400", type: "Strategy" },
+    { id: 1, title: "Duck Life 4", url: "https://ducklife4.pages.dev", image: "/img/ducklife4.jpg", type: "Action" },
+    { id: 2, title: "Raise a Floppa", url: "https://raise-a-floppa.pages.dev", image: "/img/raiseafloppa.jpg", type: "Animals" },
+    { id: 3, title: "Rooftop Snipers", url: "https://tm-rooftop-snipers.pages.dev", image: "/img/rooftopsnipers.jpg", type: "Shooter" },
+    { id: 4, title: "Fruit Ninja", url: "https://tm-fruit-ninja.pages.dev", image: "/img/fruitninja.webp", type: "Action" },
+    { id: 5, title: "Bitlife", url: "https://tm-bitlife.pages.dev", image: "/img/bitlife.jpg", type: "Simulation" },
 ];
