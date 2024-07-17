@@ -66,10 +66,15 @@
                 gameCard.addEventListener('click', () => {
                     window.open(`/launch?g=${btoa(game.url)}`, '_blank', 'width=800,height=600');
                 });
-
+                
                 gamesContainer.appendChild(gameCard);
             });
         });
+
+        function launchSeasonGame() {
+            let SEASON_GAME_URL = "https://justfall-lol.pages.dev/";
+            window.open(`/launch?g=${btoa(SEASON_GAME_URL)}`, '_blank', 'width=800,height=600');
+        }
     </script>
 </head>
 
@@ -101,7 +106,7 @@
                     <i class="fas fa-star text-yellow-400 ml-1"></i>
                     <span class="ml-2 text-gray-400">JustFall.LOL is the new free online multiplayer...</span>
                 </div>
-                <button class="w-full max-w-md bg-indigo-700 hover:bg-indigo-800 text-white py-2 px-4 rounded-full mt-2">Play</button>
+                <button class="w-full max-w-md bg-indigo-700 hover:bg-indigo-800 text-white py-2 px-4 rounded-full mt-2" onclick="launchSeasonGame()">Play</button>
             </div>
             <img src="/img/justfall.jpg" alt="JustFall.lol" class="rounded-md h-40">
         </div>
