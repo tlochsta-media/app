@@ -10,5 +10,8 @@ const games = [
     { id: 9, title: "Minecraft 1.5", url: "https://astronetclient.pages.dev", image: "/img/minecraft15.jpg", type: "Sandbox" },
     { id: 10, title: "Monkey Mart", url: "https://monkey-mart.pages.dev", image: "/img/monkeymart.jpg", type: "Simulation" },
     { id: 11, title: "Run 3", url: "https://another-run-3-test-tm.pages.dev/tn6pS9dCf37xAhkJv/", image: "/img/run3.jpg", type: "Endless" },
-    { id: 11, title: "Drift Hunters", url: "https://drift-hunters.pages.dev", image: "/img/drift-hunters.jpg", type: "Racing" },
+    { id: 12, title: "Drift Hunters", url: "https://drift-hunters.pages.dev", image: "/img/drift-hunters.jpg", type: "Racing" },
+    { id: 13, title: "Hyperspace Racers 3", url: "https://html-classic.itch.zone/html/5658186/index.html", image: "/img/hyperspace-racers-3.jpg", type: "Racing" },
+    { id: 14, title: "Eggy Car", url: "https://eggy-car.pages.dev", image: "/img/eggy-car.jpg", type: "Survival" },
+    { id: 15, title: "Slope", url: "https://slope1.glitch.me/", image: "/img/slope.jpg", type: "Racing" },
 ];
