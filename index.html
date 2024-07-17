@@ -15,6 +15,9 @@
             font-family: 'Inter', sans-serif;
             color: #fff;
         }
+        .ghvr:hover {
+            background-color: #ffffff!important;
+            color:white!important;
 
     </style>
     <script src="src/games.js"></script>
@@ -27,7 +30,7 @@
                 gameCard.classList.add('bg-gray-800', 'rounded-lg', 'overflow-hidden', 'relative');
                 gameCard.style.backgroundColor = '#1c1c1c';
                 gameCard.innerHTML = `
-                    <div class="bg-gray-700 h-32 relative">
+                    <div class="bg-gray-700 h-32 relative ghvr">
                         <img src="${game.image}" alt="${game.title}" class="h-full w-full object-cover absolute top-0 left-0">
                     </div>
                     <div class="p-4">
