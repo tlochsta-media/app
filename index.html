@@ -18,6 +18,8 @@
         .ghvr:hover {
             background-color: #ffffff!important;
             color:white!important;
+            cursor:pointer;
+        }
 
     </style>
     <script src="src/games.js"></script>
@@ -27,10 +29,10 @@
 
             games.forEach(game => {
                 const gameCard = document.createElement('div');
-                gameCard.classList.add('bg-gray-800', 'rounded-lg', 'overflow-hidden', 'relative');
+                gameCard.classList.add('bg-gray-800', 'rounded-lg', 'overflow-hidden', 'relative', 'ghvr');
                 gameCard.style.backgroundColor = '#1c1c1c';
                 gameCard.innerHTML = `
-                    <div class="bg-gray-700 h-32 relative ghvr">
+                    <div class="bg-gray-700 h-32 relative">
                         <img src="${game.image}" alt="${game.title}" class="h-full w-full object-cover absolute top-0 left-0">
                     </div>
                     <div class="p-4">
