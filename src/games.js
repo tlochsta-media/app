@@ -14,4 +14,5 @@ const games = [
     { id: 13, title: "Hyperspace Racers 3", url: "https://html-classic.itch.zone/html/5658186/index.html", image: "/img/hyperspace-racers-3.jpg", type: "Racing" },
     { id: 14, title: "Eggy Car", url: "https://eggycar.pages.dev", image: "/img/eggy-car.jpg", type: "Survival" },
     { id: 15, title: "Slope", url: "https://slope1.glitch.me/", image: "/img/slope.jpg", type: "Racing" },
+    { id: 16, title: "Spank the Monkey", url: "https://tm-app.pages.dev/game_storage/spank_the_monkey/index.html", image: "/img/spankthemonkey.avif", type: "Animals" },
 ];
