@@ -15,5 +15,6 @@ const games = [
     { id: 14, title: "Eggy Car", url: "https://eggycar.pages.dev", image: "/img/eggy-car.jpg", type: "Survival" },
     { id: 15, title: "Slope", url: "https://slope1.glitch.me/", image: "/img/slope.jpg", type: "Racing" },
     { id: 16, title: "Spank the Monkey", url: "https://tm-app.pages.dev/game_storage/spank_the_monkey/index.html", image: "/img/spankthemonkey.avif", type: "Animals" },
-    { id: 16, title: "Basketbros.io", url: "https://tm-app.pages.dev/game_storage/basket_bros/index.html", image: "/img/basketbros.avif", type: "Sports" },
+    { id: 17, title: "Basketbros.io", url: "https://tm-app.pages.dev/game_storage/basket_bros/index.html", image: "/img/basketbros.avif", type: "Sports" },
+    { id: 17, title: "Doge Miner", url: "https://tm-app.pages.dev/game_storage/DogeMiner/index.html", image: "/img/dogeminer.avif", type: "Simulation" },
 ];
