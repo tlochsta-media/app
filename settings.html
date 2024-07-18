@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Settings - tlochsta media</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="apple-touch-icon" sizes="180x180" href="/icons/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/icons/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/icons/favicon-16x16.png">
+    <link rel="manifest" href="/icons/site.webmanifest">
+    <link rel="mask-icon" href="/icons/safari-pinned-tab.svg" color="#5e10ec">
+    <link rel="shortcut icon" href="/icons/favicon.ico">
+    <meta name="msapplication-TileColor" content="#5e10ec">
+    <meta name="msapplication-config" content="/icons/browserconfig.xml">
+    <meta name="theme-color" content="#5e10ec">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap');
+        body {
+            background-color: #121212;
+            font-family: 'Inter', sans-serif;
+            color: #fff;
+        }
+        .ghvr {
+            border: 3px solid #121212;
+            transition: transform .2s;
+            cursor: pointer;
+        }
+        .ghvr:hover {
+            transform: scale(1.03);
+            border: 3px solid white;
+        }
+        body::-webkit-scrollbar {
+            width: 16px;
+        }
+        body::-webkit-scrollbar-track {
+            border-radius: 8px;
+            background-color: #1c1c1c;
+            border: 1px solid #1c1c1c;
+        }
+        body::-webkit-scrollbar-thumb {
+            border-radius: 8px;
+            border: 3px solid transparent;
+            background-clip: content-box;
+            background-color: #5b14eb;
+        }
+        .color-button {
+            display: inline-block;
+            width: 100%;
+            padding: 0.5rem;
+            border-radius: 0.375rem;
+            cursor: pointer;
+            text-align: center;
+        }
+        .hidden-color-input {
+            display: none;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="max-w-7xl mx-auto pt-8 pb-0 pr-8 pl-8">
+        <nav style="background-color:#1c1c1c" class="flex items-center justify-between p-2 px-5 rounded-full  mt-6">
+            <div class="flex items-center">
+                <img src="/img/tm-logo.png" alt="Logo" class="h-8 w-8">
+                <ul class="flex space-x-4 ml-4">
+                    <li><a href="/" class="text-white hover:text-gray-400">Games</a></li>
+                    <li><a href="/settings" class="text-white hover:text-gray-400">Settings</a></li>
+                </ul>
+            </div>
+            <div class="relative">
+                <input style="background-color:#121212" type="text" placeholder="Search" class="bg-gray-800 text-white rounded-full pl-8 pr-4 py-2 focus:outline-none">
+                <i class="fas fa-search absolute top-3 left-2 text-gray-400"></i>
+            </div>
+        </nav>
+    </div>
+
+    <div class="max-w-7xl mx-auto p-8">
+        <div style="background-color:#1c1c1c" class="bg-gray-800 p-6 rounded-lg mb-8">
+            <h1 class="text-4xl font-bold mb-4">Settings</h1>
+            <div class="mb-4">
+                <label for="font-select" class="block text-white">Font:</label>
+                <select id="font-select" class="bg-gray-700 text-white rounded p-2 w-full">
+                    <option value="Inter">Inter</option>
+                    <option value="Arial">Arial</option>
+                    <option value="Courier New">Courier New</option>
+                    <option value="Georgia">Georgia</option>
+                    <option value="Times New Roman">Times New Roman</option>
+                </select>
+            </div>
+            <div class="mb-4">
+                <label for="text-color" class="block text-white">Text Color:</label>
+                <div class="color-button bg-gray-700 text-white" id="text-color-button">Choose Color</div>
+                <input type="color" id="text-color" class="hidden-color-input">
+            </div>
+            <div class="mb-4">
+                <label for="background-color" class="block text-white">Background Color:</label>
+                <div class="color-button bg-gray-700 text-white" id="background-color-button">Choose Color</div>
+                <input type="color" id="background-color" class="hidden-color-input">
+            </div>
+            <div class="mb-4">
+                <label for="background-image" class="block text-white">Background Image URL:</label>
+                <input type="text" id="background-image" class="bg-gray-700 text-white rounded p-2 w-full" placeholder="Enter image URL">
+            </div>
+            <button onclick="saveSettings()" class="w-full bg-indigo-700 hover:bg-indigo-800 text-white py-2 px-4 rounded-full mt-2">Save Settings</button>
+            <button onclick="resetSettings()" class="w-full bg-red-700 hover:bg-red-800 text-white py-2 px-4 rounded-full mt-2">Reset Theme</button>
+        </div>
+    </div>
+
+    <footer class="mt-8 text-center text-gray-500 mb-8">
+        © 2024 tlochsta media. All Rights Reserved. <a href="/terms" class="text-gray-400 hover:text-white">Terms of Use</a> - <a href="/privacy" class="text-gray-400 hover:text-white">Privacy Policy</a>
+    </footer>
+
+    <script>
+        document.getElementById('text-color-button').addEventListener('click', () => {
+            document.getElementById('text-color').click();
+        });
+
+        document.getElementById('background-color-button').addEventListener('click', () => {
+            document.getElementById('background-color').click();
+        });
+
+        document.getElementById('text-color').addEventListener('input', (event) => {
+            document.getElementById('text-color-button').style.backgroundColor = event.target.value;
+        });
+
+        document.getElementById('background-color').addEventListener('input', (event) => {
+            document.getElementById('background-color-button').style.backgroundColor = event.target.value;
+        });
+
+        function saveSettings() {
+            const font = document.getElementById('font-select').value;
+            const textColor = document.getElementById('text-color').value;
+            const backgroundColor = document.getElementById('background-color').value;
+            const backgroundImage = document.getElementById('background-image').value;
+
+            localStorage.setItem('font', font);
+            localStorage.setItem('textColor', textColor);
+            localStorage.setItem('backgroundColor', backgroundColor);
+            localStorage.setItem('backgroundImage', backgroundImage);
+
+            applySettings();
+        }
+
+        function resetSettings() {
+            localStorage.clear();
+            location.reload();
+        }
+
+        function applySettings() {
+            const font = localStorage.getItem('font');
+            const textColor = localStorage.getItem('textColor');
+            const backgroundColor = localStorage.getItem('backgroundColor');
+            const backgroundImage = localStorage.getItem('backgroundImage');
+
+            if (font) document.body.style.fontFamily = font;
+            if (textColor) {
+                document.body.style.color = textColor;
+                document.getElementById('text-color-button').style.backgroundColor = textColor;
+            }
+            if (backgroundColor) {
+                document.body.style.backgroundColor = backgroundColor;
+                document.getElementById('background-color-button').style.backgroundColor = backgroundColor;
+            }
+            if (backgroundImage) document.body.style.backgroundImage = `url(${backgroundImage})`;
+        }
+
+        document.addEventListener('DOMContentLoaded', applySettings);
+    </script>
+</body>
+
+</html>
