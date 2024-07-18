@@ -94,9 +94,7 @@
             <img src="/img/tm-logo.png" alt="Logo" class="h-8 w-8">
             <ul class="flex space-x-4 ml-4">
                 <li><a href="/" class="text-white hover:text-gray-400">Games</a></li>
-                <li><a href="/store" class="text-white hover:text-gray-400">Store</a></li>
-                <li><a href="/developers" class="text-white hover:text-gray-400">Developers</a></li>
-                <li><a href="/info" class="text-white hover:text-gray-400">Info</a></li>
+                <li><a href="/settings" class="text-white hover:text-gray-400">Settings</a></li>
             </ul>
         </div>
         <div class="relative">
@@ -130,6 +128,22 @@
     <footer class="mt-8 text-center text-gray-500 mb-8">
         © 2024 tlochsta media. All Rights Reserved. <a href="/terms" class="text-gray-400 hover:text-white">Terms of Use</a> - <a href="/privacy" class="text-gray-400 hover:text-white">Privacy Policy</a>
     </footer>
+    <script>
+    function applySettings() {
+        const font = localStorage.getItem('font');
+        const textColor = localStorage.getItem('textColor');
+        const backgroundColor = localStorage.getItem('backgroundColor');
+        const backgroundImage = localStorage.getItem('backgroundImage');
+
+        if (font) document.body.style.fontFamily = font;
+        if (textColor) document.body.style.color = textColor;
+        if (backgroundColor) document.body.style.backgroundColor = backgroundColor;
+        if (backgroundImage) document.body.style.backgroundImage = `url(${backgroundImage})`;
+    }
+
+    document.addEventListener('DOMContentLoaded', applySettings);
+</script>
+
 </body>
 
 </html>
