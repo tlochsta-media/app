@@ -243,9 +243,9 @@
         const volumeUpButton = document.getElementById('volume-up');
         const volumeDownButton = document.getElementById('volume-down');
 	                    let player = new Plyr(playerElement, {
-                        controls: ['play', 'progress', 'current-time', 'mute', 'volume', 'fullscreen'],
-                        settings: ['quality', 'speed'],
-                        hideControls: true,
+			youtube: {
+				noCookie: true
+            		}
                     });
         searchButton.addEventListener('click', async () => {
             const query = searchInput.value;
