@@ -220,7 +220,7 @@
             <video id="player" class="hidden" controls></video></div>
             <div class="player-controls">
                 <button id="play-pause" class="text-2xl"><i class="fas fa-play"></i></button>
-                <input id="seekbar" type="range" min="0" max="100" step="1" value="0">
+                <input id="progressbar" type="range" min="0" max="100" step="1" value="0">
                 <button id="volume-up" class="text-2xl"><i class="fas fa-volume-up"></i></button>
                 <button id="volume-down" class="text-2xl"><i class="fas fa-volume-down"></i></button>
             </div>
@@ -239,7 +239,7 @@
         const modalTitle = document.getElementById('modal-title');
                 const modalArtist = document.getElementById('modal-artist');
         const playPauseButton = document.getElementById('play-pause');
-        const seekbar = document.getElementById('seekbar');
+        const progressbar = document.getElementById('progressbar');
         const volumeUpButton = document.getElementById('volume-up');
         const volumeDownButton = document.getElementById('volume-down');
 	                    let player = new Plyr(playerElement, {
@@ -317,11 +317,11 @@
         });
 		       player.on('loadedmetadata', function(event) {
     const duration = player.duration;
-    seekbar.max = duration;
+    progressbar.max = duration;
 });
 
-seekbar.addEventListener('input', function() {
-    const seekTime = parseFloat(seekbar.value);
+progressbar.addEventListener('input', function() {
+    const seekTime = parseFloat(progressbar.value);
     player.currentTime = seekTime;
     if (!player.paused) {
         player.play();
@@ -329,9 +329,9 @@ seekbar.addEventListener('input', function() {
 });
         player.on('timeupdate', function(event) {
     const currentTime = player.currentTime;
-    seekbar.value = currentTime;
+    progressbar.value = currentTime;
 });
-        seekbar.addEventListener('input', (e) => {
+        progressbar.addEventListener('input', (e) => {
             if (player) {
                 player.seek(player.duration * (e.target.value / 100));
             }
