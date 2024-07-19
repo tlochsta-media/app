@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>tlochsta media</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="apple-touch-icon" sizes="180x180" href="/icons/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/icons/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/icons/favicon-16x16.png">
+    <link rel="manifest" href="/icons/site.webmanifest">
+    <link rel="mask-icon" href="/icons/safari-pinned-tab.svg" color="#5e10ec">
+    <link rel="shortcut icon" href="/icons/favicon.ico">
+    <meta name="msapplication-TileColor" content="#5e10ec">
+    <meta name="msapplication-config" content="/icons/browserconfig.xml">
+    <meta name="theme-color" content="#5e10ec">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap');
+
+        body {
+            background-repeat: no-repeat;
+            background-size: cover;
+            background-color: #121212;
+            font-family: 'Inter', sans-serif;
+            color: #fff;
+        }
+
+        .ghvr {
+            border: 3px solid #121212;
+            transition: transform .2s;
+            cursor: pointer;
+        }
+
+        .ghvr:hover {
+            transform: scale(1.03);
+            border: 3px solid white;
+        }
+
+        body::-webkit-scrollbar {
+            width: 16px;
+        }
+
+        body::-webkit-scrollbar-track {
+            border-radius: 8px;
+            background-color: #1c1c1c;
+            border: 1px solid #1c1c1c;
+        }
+
+        body::-webkit-scrollbar-thumb {
+            border-radius: 8px;
+            border: 3px solid transparent;
+            background-clip: content-box;
+            background-color: #5b14eb;
+        }
+
+        .thumbnail {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 50;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgb(0, 0, 0);
+            background-color: rgba(0, 0, 0, 0.9);
+        }
+
+        .modal-content {
+            background-color: #fefefe;
+            margin: 15% auto;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 80%;
+            position: relative;
+        }
+
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+        }
+
+        .close:hover,
+        .close:focus {
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdn.plyr.io/3.6.8/plyr.css" />
+</head>
+
+<body>
+    <div class="max-w-7xl mx-auto pt-8 pb-0 pr-8 pl-8">
+        <nav style="background-color:#1c1c1c" class="flex items-center justify-between p-2 px-5 rounded-full mt-6">
+            <div class="flex items-center">
+                <img src="/img/tm-logo.png" alt="Logo" class="h-8 w-8">
+                <ul class="flex space-x-4 ml-4">
+                    <li><a href="/" class="text-white hover:text-gray-400">Games</a></li>
+                    <li><a href="/settings" class="text-white hover:text-gray-400">Settings</a></li>
+                </ul>
+            </div>
+        </nav>
+    </div>
+
+    <div class="max-w-7xl mx-auto p-8">
+        <div class="bg-gray-800 p-6 rounded-lg flex items-center justify-between mb-8">
+            <div class="relative">
+                <input style="background-color:#121212" id="search-input" type="text" placeholder="Search for songs" class="bg-gray-800 text-white rounded-full pl-8 pr-4 py-2 focus:outline-none">
+                <i class="fas fa-search absolute top-3 left-2 text-gray-400"></i>
+                <button id="search-button" class="ml-4 bg-indigo-700 hover:bg-indigo-800 text-white py-2 px-4 rounded-full">Search</button>
+            </div>
+        </div>
+
+        <div id="games-container" class="grid grid-cols-3 gap-4"></div>
+    </div>
+
+    <footer class="mt-8 text-center text-gray-500 mb-8">
+        © 2024 tlochsta media. All Rights Reserved. <a href="/terms" class="text-gray-400 hover:text-white">Terms of Use</a> - <a href="/privacy" class="text-gray-400 hover:text-white">Privacy Policy</a>
+    </footer>
+
+    <div id="myModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <video id="player" controls></video>
+        </div>
+    </div>
+
+    <script src="https://cdn.plyr.io/3.6.8/plyr.polyfilled.js"></script>
+    <script>
+        const searchButton = document.getElementById('search-button');
+        const searchInput = document.getElementById('search-input');
+        const gamesContainer = document.getElementById('games-container');
+        const modal = document.getElementById("myModal");
+        const span = document.getElementsByClassName("close")[0];
+        const playerElement = document.getElementById('player');
+        const player = new Plyr(playerElement);
+
+        searchButton.addEventListener('click', async () => {
+            const query = searchInput.value;
+            if (!query) return;
+
+            const response = await fetch(`https://super-bird-fdb7.lochstampfortanner5928.workers.dev/?query=${encodeURIComponent(query)}`);
+            const data = await response.json();
+            gamesContainer.innerHTML = '';
+
+            data.items.forEach(item => {
+                const videoId = item.id.videoId;
+                const thumbnailUrl = item.snippet.thumbnails.high.url;
+                const videoElement = document.createElement('div');
+                videoElement.classList.add('bg-gray-800', 'rounded-lg', 'overflow-hidden', 'relative', 'ghvr');
+                videoElement.style.backgroundColor = '#1c1c1c';
+
+                videoElement.innerHTML = `
+                    <div class="bg-gray-700 h-32 relative">
+                        <img src="${thumbnailUrl}" alt="${item.snippet.title}" class="h-full w-full object-cover thumbnail">
+                    </div>
+                    <div class="p-4">
+                        <span class="block text-white">${item.snippet.title}</span>
+                        <span class="block text-gray-400">${item.snippet.channelTitle}</span>
+                    </div>
+                `;
+
+                videoElement.addEventListener('click', () => {
+                    modal.style.display = "block";
+                    player.source = {
+                        type: 'video',
+                        sources: [{
+                            src: videoId,
+                            provider: 'youtube',
+                        }],
+                    };
+                    player.play();
+                });
+
+                gamesContainer.appendChild(videoElement);
+            });
+        });
+
+        span.onclick = function() {
+            modal.style.display = "none";
+            player.stop();
+        }
+
+        window.onclick = function(event) {
+            if (event.target == modal) {
+                modal.style.display = "none";
+                player.stop();
+            }
+        }
+    </script>
+</body>
+
+</html>
