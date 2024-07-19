@@ -316,7 +316,7 @@
             }
         });
 		       player.on('loadedmetadata', function(event) {
-    const duration = event.detail.plyr.duration;
+    const duration = player.duration;
     seekbar.max = duration;
 });
 
