@@ -241,8 +241,11 @@
         const seekbar = document.getElementById('seekbar');
         const volumeUpButton = document.getElementById('volume-up');
         const volumeDownButton = document.getElementById('volume-down');
-        let player;
-
+	                    let player = new Plyr(playerElement, {
+                        controls: ['play', 'progress', 'current-time', 'mute', 'volume', 'fullscreen'],
+                        settings: ['quality', 'speed'],
+                        hideControls: true,
+                    });
         searchButton.addEventListener('click', async () => {
             const query = searchInput.value;
             if (!query) return;
@@ -274,12 +277,6 @@
                     modalTitle.textContent = item.title;
                     modalArtist.textContent = item.creator;
                     
-                    playerElement.classList.remove('hidden');
-                    player = new Plyr(playerElement, {
-                        controls: ['play', 'progress', 'current-time', 'mute', 'volume', 'fullscreen'],
-                        settings: ['quality', 'speed'],
-                        hideControls: true,
-                    });
                     player.source = {
                         type: 'video',
                         sources: [{
