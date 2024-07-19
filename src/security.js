@@ -14,10 +14,27 @@ function detectInjectedScripts() {
           }
         });
       }
+      if (mutation.type === 'attributes') {
+        if (mutation.attributeName === 'href' || mutation.attributeName === 'src') {
+          const element = mutation.target;
+          if (element.getAttribute('href')?.startsWith('javascript:') || element.getAttribute('src')?.startsWith('javascript:')) {
+            alert('Unauthorized JavaScript detected in attribute! If someone gave you code to inject, do not trust them.');
+            element.removeAttribute('href');
+            element.removeAttribute('src');
+          }
+        }
+      }
     });
   });
 
-  observer.observe(document, { childList: true, subtree: true });
+  observer.observe(document, { childList: true, subtree: true, attributes: true });
+  document.addEventListener('click', (event) => {
+    const target = event.target;
+    if (target.tagName === 'A' && target.href.startsWith('javascript:')) {
+      event.preventDefault();
+      alert('Unauthorized JavaScript detected in link! If someone gave you code to inject, do not trust them.');
+    }
+  }, true);
 }
 
 window.onload = detectInjectedScripts;
