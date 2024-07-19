@@ -314,7 +314,20 @@
                 }
             }
         });
-		
+		       player.on('loadedmetadata', function(event) {
+    const duration = event.detail.plyr.duration;
+    seekbar.max = duration;
+});
+
+seekbar.addEventListener('input', function() {
+    const seekTime = parseFloat(seekbar.value);
+    player.currentTime = seekTime;
+
+    // Check if the player is paused, only play if it was playing before seeking
+    if (!player.paused) {
+        player.play();
+    }
+});
         player.on('timeupdate', function(event) {
     const currentTime = event.detail.plyr.currentTime;
     seekbar.value = currentTime;
