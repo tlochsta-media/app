@@ -322,14 +322,12 @@
 seekbar.addEventListener('input', function() {
     const seekTime = parseFloat(seekbar.value);
     player.currentTime = seekTime;
-
-    // Check if the player is paused, only play if it was playing before seeking
     if (!player.paused) {
         player.play();
     }
 });
         player.on('timeupdate', function(event) {
-    const currentTime = event.detail.plyr.currentTime;
+    const currentTime = player.currentTime;
     seekbar.value = currentTime;
 });
         seekbar.addEventListener('input', (e) => {
