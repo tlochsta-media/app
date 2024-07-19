@@ -150,7 +150,7 @@
             const query = searchInput.value;
             if (!query) return;
 
-            const response = await fetch(`https://super-bird-fdb7.lochstampfortanner5928.workers.dev/?query=${encodeURIComponent(query)}`);
+            const response = await fetch(`https://music-server.tlochsta.media/?query=${encodeURIComponent(query)}`);
             const data = await response.json();
             gamesContainer.innerHTML = '';
 
