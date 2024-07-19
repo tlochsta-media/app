@@ -39,11 +39,3 @@ class TMAPI {
     }
 }
 
-// Usage example:
-const tm = new TMAPI(games);
-const select = document.getElementById("gameSelectElement");
-tm.newSelectElement(select);
-
-select.onchange = function() {
-    window.location.href = tm.getData("url", select.value);
-};
