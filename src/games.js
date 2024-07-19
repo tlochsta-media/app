@@ -20,7 +20,7 @@ const games = [
 ];
 
 class TMAPI {
-    constructor(games) {
+    constructor() {
         this.games = games;
     }
 
