@@ -18,3 +18,32 @@ const games = [
     { id: 17, title: "Basketbros.io", url: "https://tm-app.pages.dev/game_storage/basket_bros/index.html", image: "/img/basketbros.avif", type: "Sports" },
     { id: 18, title: "Doge Miner", url: "https://tm-app.pages.dev/game_storage/DogeMiner/index.html", image: "/img/dogeminer.avif", type: "Simulation" },
 ];
+
+class TMAPI {
+    constructor(games) {
+        this.games = games;
+    }
+
+    newSelectElement(selectElement) {
+        this.games.forEach(game => {
+            const option = document.createElement('option');
+            option.value = game.id;
+            option.textContent = game.title;
+            selectElement.appendChild(option);
+        });
+    }
+
+    getData(field, id) {
+        const game = this.games.find(game => game.id == id);
+        return game ? game[field] : null;
+    }
+}
+
+// Usage example:
+const tm = new TMAPI(games);
+const select = document.getElementById("gameSelectElement");
+tm.newSelectElement(select);
+
+select.onchange = function() {
+    window.location.href = tm.getData("url", select.value);
+};
